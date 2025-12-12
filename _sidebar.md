@@ -1,3 +1,3 @@
 * Getting started
-    * [Play Game](WebGl/index.html)
+    * [Play Game](WebGL/index.html)
     * [Game Docs](Docs/GameDoc.md)
