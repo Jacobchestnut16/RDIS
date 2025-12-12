@@ -1,30 +1,36 @@
 using UnityEngine;
+using UnityEngine.XR;
 
-public class PlayerInteract : MonoBehaviour
+public class VRRayInteract : MonoBehaviour
 {
-    public float interactDistance = 4f;
+    public Transform rayOrigin;          // controller transform
+    public float interactDistance = 10f;
     public LayerMask interactMask;
-    public Camera cam;
+
+    public XRNode controllerNode = XRNode.RightHand;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))        // interaction key
+        if (!TriggerPressed())
+            return;
+		Debug.LogWarning("TriggerPressed");
+
+        Ray ray = new Ray(rayOrigin.position, rayOrigin.forward);
+        Debug.DrawRay(ray.origin, ray.direction * interactDistance, Color.green, 1);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, interactDistance, interactMask))
         {
-            Ray ray = new Ray(cam.transform.position, cam.transform.forward);
-            Debug.DrawRay(ray.origin, ray.direction * interactDistance, Color.red, 4);
+            InteractableCamera interact =
+                hit.collider.GetComponent<InteractableCamera>();
             
-            
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, interactDistance, interactMask))
-            {
-                // Look for an interactable script on the object
-                InteractableCamera interact = hit.collider.GetComponent<InteractableCamera>();
-                
-                if (interact != null)
-                {
-                    interact.Trigger();
-                }
-            }
+            Debug.LogWarning($"pssible interactable {interact.name}");
+            if (interact != null)
+                interact.Trigger();
         }
+    }
+
+    bool TriggerPressed()
+    {
+        return OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger);
     }
 }

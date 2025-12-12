@@ -7,7 +7,7 @@ public class InteractableCamera : MonoBehaviour
     public Camera mainCamera;
     public AudioSource audioSource;
 
-    bool isPlaying = false;
+    bool isPlaying;
 
     public void Trigger()
     {
@@ -15,20 +15,18 @@ public class InteractableCamera : MonoBehaviour
             StartCoroutine(PlaySequence());
     }
 
-    private IEnumerator PlaySequence()
+    IEnumerator PlaySequence()
     {
         isPlaying = true;
 
-        objectCamera.enabled = true;
         mainCamera.enabled = false;
-        
-        if (!objectCamera.enabled)
-            objectCamera.enabled = true;
+        objectCamera.enabled = true;
+
         audioSource.Play();
         yield return new WaitForSeconds(audioSource.clip.length);
 
-        mainCamera.enabled = true;
         objectCamera.enabled = false;
+        mainCamera.enabled = true;
 
         isPlaying = false;
     }

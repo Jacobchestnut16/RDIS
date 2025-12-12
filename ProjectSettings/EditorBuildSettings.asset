@@ -9,12 +9,14 @@ EditorBuildSettings:
     path: Assets/_Scenes/Main Menu.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/_Scenes/US/US_Scene_0.unity
+    path: Assets/_Scenes/US_Scene_0.unity
     guid: 21cb6553bce87a64ea61d9f34ccaccf4
   - enabled: 1
-    path: Assets/_Scenes/Haitai/Scene_0.unity
+    path: Assets/_Scenes/Scene_0.unity
     guid: 6c828afc201554048995c8cfdb000eb7
   - enabled: 1
     path: Assets/_Scenes/Menu.unity
     guid: 3c3665ddf76d60e4490b3707d561e063
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 2d94bd112c5e5405e8f75396772958f9, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 118cfec77c0bb4545bbac6e767ce1ea6, type: 2}
